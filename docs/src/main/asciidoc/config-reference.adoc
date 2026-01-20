@@ -182,6 +182,15 @@ config source by setting the `config_ordinal` property and the ordinal value. Th
 affects the ordinal of the source in which is being set. Sources are sorted first by their ordinal, then by location
 order, and finally by loading order.
 
+When using `quarkus.config.locations` in `application.properties`, the specified file must exist at both build time and runtime. 
+If the file is only available at runtime, you can:
+
+* Provide an empty file at build time.
+* Use the environment variable `QUARKUS_CONFIG_LOCATIONS` at runtime.
+* Use a profile-specific property (e.g., `%config.quarkus.config.locations`) and activate the profile at runtime.
+
+This ensures the build process does not fail while allowing the correct file to be loaded at runtime.
+
 === Additional Config Sources
 
 Quarkus provides additional extensions which cover other configuration formats and stores:
